@@ -26,15 +26,15 @@ namespace ExelentAutoVerify
             ).Run();
 
         // dll call
-        public void Run() => this.Update();
+        public string Run() => this.Update();
 
-        private void Update()
+        private string Update()
         {
             Console.WriteLine("CurrentApp -> " + verificationService.ToString());
             Console.WriteLine("Doğrulanıyor...");
 
             UserInfo? result = verificationService.Verify(sendDiscordMsg);
-            if (result == null) return;
+            if (result == null) return null;
 
             Console.WriteLine("Giriş başarılı.");
 
@@ -44,6 +44,8 @@ namespace ExelentAutoVerify
             {
                 PrintStatus(user);
             }
+
+            return user.Token;
         }
 
         private void PrintStatus(UserInfo user)
